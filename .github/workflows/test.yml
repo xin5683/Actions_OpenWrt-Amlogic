@@ -65,7 +65,10 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     - name: 跑分测试
       run: |
-        curl -sL yabs.sh | bash -s -- -fi
+        git clone https://github.com/eembc/coremark.git ; cd coremark/
+        make XCFLAGS="-DMULTITHREAD=2 -DUSE_FORK"
+        cat run1.log
+        cat run2.log
     - name: 编译固件
       id: compile
       run: |
